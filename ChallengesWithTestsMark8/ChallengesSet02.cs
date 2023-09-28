@@ -93,7 +93,7 @@ namespace ChallengesWithTestsMark8
             {
                 return 0;
             }
-            return numbers.Where(x => x % 2 == 0).Sum;  //Filters
+            return numbers.Where(x => x % 2 == 0).Sum();  //Filters
         
         }
 
