@@ -54,7 +54,7 @@ namespace ChallengesWithTestsMark8
                 isPrime = true;
             }
 
-            if ((num == 1) || (num == 3))
+            if (num == 1) 
             {
                 isPrime = false;
             }
@@ -105,9 +105,9 @@ namespace ChallengesWithTestsMark8
                     {
                         break;
                     }
-                }
-                currentCount++;
 
+                    currentCount++;
+                }
 
                 if (currentCount > count)
                 {

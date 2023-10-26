@@ -65,7 +65,7 @@ namespace ChallengesWithTestsMark8
 
         public string TurnWordsIntoSentence(string[] words)
         {
-           if(words == null ||words.Length == 0)
+           if(words == null || words.Length == 0)
             {
                 return "";
             }

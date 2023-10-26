@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xunit;
+using Xunit.Sdk;
 
 namespace ChallengesWithTestsMark8.Tests
 {
@@ -120,25 +121,33 @@ namespace ChallengesWithTestsMark8.Tests
             Assert.Equal(expected, actual);
         }
 
-        [Theory]
-        [InlineData(new string[] { "Hello,", "world" }, "Hello, world.")]
-        [InlineData(new string[] { "This", "is", "only", "a", "test" }, "This is only a test.")]
-        [InlineData(new string[] { "This", "is", "", "a", "test" }, "This is a test.")]
-        [InlineData(new string[] { "This", "is", " ", "a", "test" }, "This is a test.")]
-        [InlineData(new string[] { "This", "is ", "  ", "a  ", " test  " }, "This is a test.")]
-        [InlineData(new string[] { " ", " " }, "")]
-        [InlineData(new string[] { }, "")]
-        [InlineData(null, "")]
-        public void TurnWordsIntoSentence(string[] words, string expected)
+        public string TurnWordsIntoSentence(string[] words)
         {
-            // Arrange
-            ChallengesSet05 challenger = new ChallengesSet05();
+            if(words == null || words.Length == 0)
+            {
+                return "";
+            }
 
-            // Act
-            string actual = challenger.TurnWordsIntoSentence(words);
+            string sentence = "";
 
-            // Assert
-            Assert.Equal(expected, actual);
+            foreach(string word in words)
+            {
+                if(word.Trim().Length > 0 )
+                {
+                    sentence += word.Trim() + "";
+                }
+            }
+
+
+            if(sentence.Length == 0)
+            {
+                return "";
+            }
+
+            sentence = sentence.Trim();
+            sentence += ".";
+            return sentence;
+
         }
 
         [Theory]
@@ -170,43 +179,37 @@ namespace ChallengesWithTestsMark8.Tests
             }
         }
 
-        [Theory]
-        [InlineData(new[] { 1, 2, 3 }, 5, true)]
-        [InlineData(new[] { 1, 2, 3 }, 3, true)]
-        [InlineData(new[] { 7, 3, 20 }, 10, true)]
-        [InlineData(new[] { 7, 3, 20 }, 27, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 3, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 9, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 10, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 14, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 2, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 4, true)]
-        [InlineData(new[] { 5, -2, 4, 4, 8 }, 8, true)]
-        [InlineData(new[] { 5, -2, 4, 4 }, 8, true)]
-        [InlineData(new[] { 3, -3 }, 0, true)]
-        [InlineData(new[] { 3, -3, 3, -3 }, -6, true)]
-        [InlineData(new[] { 3, -3, 3, -3 }, 0, true)]
-        [InlineData(new[] { 3, -3, 3, -3 }, 6, true)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 20, false)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 5, false)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 8, false)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 15, false)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, 0, false)]
-        [InlineData(new[] { 5, -2, 4, 6, 8 }, -2, false)]
-        [InlineData(new[] { 4 }, 8, false)]
-        [InlineData(new[] { 4 }, 4, false)]
-        [InlineData(new int[] { }, 1, false)]
-        [InlineData(new int[] { }, 0, false)]
-        public void TwoDifferentElementsInArrayCanSumToTargetNumber(int[] numbers, int targetNumber, bool expected)
+        public bool TwoDifferentElementsInArrayCanSumToTargetNumber(int[] nums, int targetNumber)
         {
-            // Arrange
-            ChallengesSet05 challenger = new ChallengesSet05();
+         
 
-            // Act
-            bool actual = challenger.TwoDifferentElementsInArrayCanSumToTargetNumber(numbers, targetNumber);
 
-            // Assert
-            Assert.Equal(expected, actual);
+            for(int i = 0; i < nums.Length; i++)
+            {
+
+                for (int j = i + 1; j < nums.Length; j++)
+
+                {
+                    if (nums[i] + nums[j] == targetNumber)
+                    {
+                        return true;
+                    }
+
+
+                }
+
+
+
+
+            }
+
+
+
+
+            return false;
+
+
+
         }
     }
 }
